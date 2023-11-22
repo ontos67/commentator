@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"os"
 
 	"github.com/jackc/pgx/v4/pgxpool"
 )
@@ -25,8 +26,7 @@ type Comment struct {
 }
 
 func New() (*DB, error) {
-	//connstr := os.Getenv("agrigatordb")
-	connstr := "postgres://postgres:" + "plazma" + "@localhost:5432/comments"
+	connstr := os.Getenv("agrigatordb")
 	if connstr == "" {
 		return nil, errors.New("не указано подключение к БД")
 	}
