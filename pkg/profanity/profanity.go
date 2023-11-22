@@ -3,7 +3,6 @@ package profanity
 import (
 	"bufio"
 	storage "commentator/pkg/storage/pstg"
-	"fmt"
 	"log"
 	"os"
 	"regexp"
@@ -45,7 +44,6 @@ func ProfanityCheckService(db *storage.DB) {
 				if err != nil {
 					log.Println("ошибка проверки на мат:", err)
 				}
-				fmt.Println("на удаление:", idForDelete)
 				if len(idForDelete) > 0 {
 					for _, id := range idForDelete {
 						err := db.DeleteComment(id)

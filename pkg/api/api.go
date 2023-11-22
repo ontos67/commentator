@@ -4,6 +4,7 @@ package api
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -78,6 +79,7 @@ func (api *API) saveCom(w http.ResponseWriter, r *http.Request) {
 	}
 	api.db.CChan <- c
 	json.NewEncoder(w).Encode(c.ID)
+	log.Println("Commentator: API: ", "ok ", r.URL.Query().Encode())
 }
 
 // deleteCom обрабатывает запрос на удаление комментария
@@ -97,6 +99,7 @@ func (api *API) deleteCom(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	json.NewEncoder(w).Encode(id)
+	log.Println("Commentator: API: ", "ok ", r.URL.Query().Encode())
 }
 
 // comListP обрабатывает запрос на коммертарии на уровень ниже от родительского.
@@ -122,6 +125,7 @@ func (api *API) comListP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	json.NewEncoder(w).Encode(l)
+	log.Println("Commentator: API: ", "ok ", r.URL.Query().Encode())
 }
 
 // comListCont обрабатывает запрос на коммертарии, начиная с конкретного ID и последовательно n шт.
@@ -147,4 +151,5 @@ func (api *API) comListCont(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	json.NewEncoder(w).Encode(l)
+	log.Println("Commentator: API: ", "ok ", r.URL.Query().Encode())
 }
