@@ -1,8 +1,4 @@
 {
-   "conf":[
-      "cce",
-      "2344",
-      "99976"
-   ],
-   "cond": 10
+   "port":":999",
+   "dbadr":"@localhost:5432/comments"
 }

@@ -25,8 +25,9 @@ type Comment struct {
 	ParentID   int    // ID родителя (или статьи или комментария)
 }
 
-func New() (*DB, error) {
-	connstr := os.Getenv("agrigatordb")
+func New(adr string) (*DB, error) {
+	dbuserpass := os.Getenv("agrigatordb") //"postgres://postgres:" + "password"
+	connstr := dbuserpass + adr
 	if connstr == "" {
 		return nil, errors.New("не указано подключение к БД")
 	}

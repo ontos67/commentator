@@ -22,7 +22,7 @@ var coms = []Comment{
 }
 
 func TestNew(t *testing.T) {
-	_, err := New()
+	_, err := New("@localhost:5432/comments")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -37,7 +37,7 @@ func TestDB_Comment(t *testing.T) {
 		ParentType: "A",
 		ParentID:   453,
 	}
-	db, err := New()
+	db, err := New("@localhost:5432/comments")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -56,7 +56,7 @@ func TestDB_SaveComment(t *testing.T) {
 	type args struct {
 		c Comment
 	}
-	dbp, err := New()
+	dbp, err := New("@localhost:5432/comments")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -128,7 +128,7 @@ func TestDB_DeleteComment(t *testing.T) {
 	type args struct {
 		id int
 	}
-	dbp, err := New()
+	dbp, err := New("@localhost:5432/comments")
 	if err != nil {
 		t.Fatal(err)
 	}

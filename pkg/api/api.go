@@ -37,7 +37,7 @@ func (api *API) endpoints() {
 }
 
 // saveCom обрабатывает запрос на сохранение нового комментария
-// в браузере http://localhost:9999/comment/save?userid=64&text=заманали%20комары&pubtime=12344134&ptype=A&pid=2345
+// в браузере http://localhost:999/comment/save?userid=64&text=заманали%20комары&pubtime=12344134&ptype=A&pid=2345
 // storage.Comment
 func (api *API) saveCom(w http.ResponseWriter, r *http.Request) {
 	var c storage.Comment
@@ -83,7 +83,7 @@ func (api *API) saveCom(w http.ResponseWriter, r *http.Request) {
 }
 
 // deleteCom обрабатывает запрос на удаление комментария
-// в браузере http://localhost:9999/comment/del?id=64
+// в браузере http://localhost:999/comment/del?id=64
 // id
 func (api *API) deleteCom(w http.ResponseWriter, r *http.Request) {
 	form := r.URL.Query()
@@ -103,7 +103,7 @@ func (api *API) deleteCom(w http.ResponseWriter, r *http.Request) {
 }
 
 // comListP обрабатывает запрос на коммертарии на уровень ниже от родительского.
-// в браузере http://localhost:9999/comment/comListP?pT=C&pId=67
+// в браузере http://localhost:999/comment/comListP?pT=C&pId=67
 // pT, pId
 func (api *API) comListP(w http.ResponseWriter, r *http.Request) {
 	form := r.URL.Query()
@@ -129,7 +129,7 @@ func (api *API) comListP(w http.ResponseWriter, r *http.Request) {
 }
 
 // comListCont обрабатывает запрос на коммертарии, начиная с конкретного ID и последовательно n шт.
-// в браузере http://localhost:9999/comment/comListCont?sID=44&n=5
+// в браузере http://localhost:999/comment/comListCont?sID=44&n=5
 // sID, n
 func (api *API) comListCont(w http.ResponseWriter, r *http.Request) {
 	form := r.URL.Query()

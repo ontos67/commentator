@@ -2,6 +2,7 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
 	"os"
@@ -11,6 +12,11 @@ import (
 	storage "commentator/pkg/storage/pstg"
 )
 
+type Config struct {
+	Port  string `json:"port"`
+	DBadr string `json:"dbadr"`
+}
+
 func main() {
 	f, err := os.OpenFile("testlogfile", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
@@ -19,18 +25,28 @@ func main() {
 	defer f.Close()
 	log.SetOutput(f)
 	log.Println("Запуск службы...")
+	var conf Config
+	b, err := os.ReadFile("./cmd/config.json")
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = json.Unmarshal(b, &conf)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	db, err := storage.New()
+	db, err := storage.New(conf.DBadr)
 	defer close(db.CChan)
 	if err != nil {
 		log.Fatal(err)
 	}
 	api := api.New(db)
+
 	profanity.ProfanityCheckService(db)
 
 	// запуск сервера
-	log.Println("Запуск сервера. Порт: 999...")
-	err = http.ListenAndServe(":999", api.Router())
+	log.Println("Запуск сервера. Порт", conf.Port)
+	err = http.ListenAndServe(conf.Port, api.Router())
 	if err != nil {
 		log.Fatal(err)
 	}
